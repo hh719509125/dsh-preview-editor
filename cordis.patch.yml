@@ -1,0 +1,97 @@
+# Bundle patch for @local/dsh-plugin-document-editor.
+#
+# Inserting the row here is what composes the plugin into a profile. Override
+# any value below from the profile's own cordis.patch.yml to change it.
+- insert:
+    - id: document-editor
+      name: '@local/dsh-plugin-document-editor'
+      config:
+        # Suffixes whose files open in the editor instead of the plain-text
+        # viewer. Listing a suffix here makes the editor that file's DEFAULT
+        # renderer; the plain-text viewer stays available in the dropdown.
+        #
+        # Deliberately absent: md/markdown (see `markdown` below), html, svg,
+        # csv/tsv and the spreadsheet formats, images, and PDF — each already
+        # has a shipped renderer that is more useful than a raw text editor.
+        extensions:
+          - txt
+          - text
+          - log
+          - nfo
+          - json
+          - jsonc
+          - json5
+          - ndjson
+          - yaml
+          - yml
+          - toml
+          - ini
+          - cfg
+          - conf
+          - env
+          - properties
+          - js
+          - mjs
+          - cjs
+          - jsx
+          - ts
+          - mts
+          - cts
+          - tsx
+          - py
+          - rb
+          - go
+          - rs
+          - java
+          - kt
+          - kts
+          - c
+          - h
+          - cc
+          - cpp
+          - hpp
+          - cs
+          - php
+          - swift
+          - scala
+          - lua
+          - pl
+          - r
+          - jl
+          - dart
+          - vue
+          - svelte
+          - astro
+          - sh
+          - bash
+          - zsh
+          - fish
+          - ps1
+          - psm1
+          - bat
+          - cmd
+          - sql
+          - graphql
+          - gql
+          - diff
+          - patch
+          - css
+          - scss
+          - less
+          - styl
+        # Offer "Edit source" beside the rendered Markdown preview. The preview
+        # remains the default for .md; editing is one dropdown click away.
+        markdown: true
+        # Refuse a buffer larger than this many UTF-8 bytes.
+        maxBytes: 8388608
+
+# Machine-specific settings deliberately do not live here. A bundle patch is
+# applied to every profile that installs this package, so an absolute path would
+# follow other people onto their machines. To hot-reload this package's sources
+# while developing, put the watch root in the installing profile's own
+# cordis.patch.yml, which outranks every bundle layer:
+#
+#   - id: hmr
+#     name: '@deepseek-ai/dsh-hmr'
+#     config:
+#       root: ['.', '<absolute path to this package>']

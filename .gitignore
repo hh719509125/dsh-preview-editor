@@ -1,0 +1,9 @@
+# 运行期与开发期产物
+node_modules/
+*.log
+
+# 本机绝对路径只存在于 cordis.patch.yml 的 hmr.root 里，随包一起发布；
+# 换机器时按 README 的说明改成目标机路径或删掉该条覆盖。
+
+.DS_Store
+Thumbs.db

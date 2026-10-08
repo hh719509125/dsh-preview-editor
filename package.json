@@ -1,0 +1,40 @@
+{
+  "name": "@local/dsh-plugin-document-editor",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Edit text documents in place inside the Sidebar document preview, saving through an authenticated Host route.",
+  "license": "MIT",
+  "icon": "./icon.svg",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "icon.svg",
+    "locale/*.json",
+    "README.md"
+  ],
+  "meta": {
+    "title": "文档编辑",
+    "description": "在右侧栏的文档预览里直接编辑文本文件：保存、撤销、冲突保护、Ctrl+S。"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-sidebar-documentpreview"
+      ]
+    }
+  }
+}
