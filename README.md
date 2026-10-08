@@ -17,8 +17,10 @@ DSH's shipped document preview is read-only by design — its own README lists *
 **Install** — ask your DSH agent, then reload the page once:
 
 ```
-plugin_manager { action: "install_bundle", target: "github:hh719509125/deepseek_harness_plugin#path:/document-editor" }
+plugin_manager { action: "install_bundle", target: "github:hh719509125/dsh-preview-editor" }
 ```
+
+Pin a release with `github:hh719509125/dsh-preview-editor#v1.0.0`, or a full 40-character commit SHA (an abbreviated one does not resolve).
 
 **Use**
 
@@ -118,19 +120,28 @@ The rest of this document is in Chinese and goes deeper: how the write path is a
 插件由 **agent** 安装（`plugin_manager` 是 agent 工具，用户不直接调用）。把这条**规格**发给你的 DSH agent：
 
 ```
-plugin_manager { action: "install_bundle", target: "github:hh719509125/deepseek_harness_plugin#path:/document-editor" }
+plugin_manager { action: "install_bundle", target: "github:hh719509125/dsh-preview-editor" }
 ```
 
-`#path:/document-editor` 是 pnpm 的 git 子目录规格，**不需要发布到 npm**，也不需要手动克隆。安装后会写进 profile 的 `package.json` 和 `dsh.profile.bundles` 并热应用。
+`github:<owner>/<repo>` 是 pnpm 的 git 规格，**不需要发布到 npm**，也不需要手动克隆。安装后会写进 profile 的 `package.json` 和 `dsh.profile.bundles` 并热应用。
+
+**锁定版本**：上面这条跟踪 `main`。要钉住版本，把 ref 接在 `#` 后面：
+
+```
+github:hh719509125/dsh-preview-editor#v1.0.0          # 钉到某个 release
+github:hh719509125/dsh-preview-editor#<完整 40 位 SHA>   # 钉到确切提交
+```
+
+> 实测注意：**必须用完整的 40 位 SHA**，短 SHA 解析不了（`git ls-remote` 不返回缩写）。
 
 - **权限**：`plugin_manager` 需要 `danger-full-access` 或当次批准。装进来的 Host 代码在工作区沙箱之外、以你的用户身份在本进程内执行，装之前请先读一遍 `index.js`。
 - **刷新页面**：安装是热应用的，但浏览器侧需要刷新一次才能加载新的 client bundle。
 
-想固定版本或离线时，改为克隆后按绝对路径安装：
+想离线或改代码时，克隆后按**绝对路径**安装：
 
 ```
-git clone https://github.com/hh719509125/deepseek_harness_plugin.git
-plugin_manager { action: "install_bundle", target: "<克隆路径>/document-editor" }
+git clone https://github.com/hh719509125/dsh-preview-editor.git
+plugin_manager { action: "install_bundle", target: "<克隆路径>" }
 ```
 
 > ⚠️ 路径装法下 profile 只记录路径、不复制文件，装好之后不要移动或删除那个目录。

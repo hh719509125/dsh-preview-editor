@@ -6,6 +6,11 @@
   "description": "Edit text documents in place inside the Sidebar document preview, saving through an authenticated Host route.",
   "license": "MIT",
   "icon": "./icon.svg",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hh719509125/dsh-preview-editor.git"
+  },
+  "homepage": "https://github.com/hh719509125/dsh-preview-editor#readme",
   "exports": {
     ".": "./index.js",
     "./client": "./client.js",
@@ -18,6 +23,7 @@
     "cordis.patch.yml",
     "icon.svg",
     "locale/*.json",
+    "docs/*",
     "README.md"
   ],
   "meta": {
